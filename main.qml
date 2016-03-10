@@ -8,19 +8,40 @@ Window {
     QtObject {
         id: ev
         signal toExit
+        signal join
+        signal actions
+        signal move
+        signal radar
+        signal cannon
+        // ...
     }
 
     WebSocket {
         id: socket
-        url: "ws://localhost:3000/"
+        url: "ws://echo.websocket.org"
+
+        onTextMessageReceived: {
+            var response = JSON.parse(message);
+            console.log(response.type + ":" + response.teamName)
+        }
+        onStatusChanged: {
+            console.log("Status:" + socket.status)
+            if (socket.status == WebSocket.Error) {
+                 console.log("Error: " + socket.errorString)
+             } else if (socket.status == WebSocket.Open) {
+                 socket.sendTextMessage('{"type": "join","teamName": "ATeam"}')
+                 console.log("Send ping")
+             } else if (socket.status == WebSocket.Closed) {
+                 console.log("Connection Closed")
+             }
+        }
+        active: true
     }
 
-
     StateMachine {
-        id: stateMachine
+        id: sm
         initialState: running
         running: true
-        signal toExit
         State {
             id: running
             onEntered: console.log("entry")
