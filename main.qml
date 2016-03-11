@@ -7,13 +7,23 @@ Window {
     visible: true
     QtObject {
         id: ev
+        // Game control events
         signal toExit
         signal join
+
+        // Game basic events
         signal actions
         signal move
         signal radar
         signal cannon
-        // ...
+
+        // bOt modes
+        signal flee
+        signal attack
+        signal patrol
+
+        // Fleet modes
+        signal teamAttack
     }
 
     WebSocket {
