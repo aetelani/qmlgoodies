@@ -25,12 +25,14 @@ QtObject {
     signal gameConnected
     signal exitGame
 
+    // Initial game setup message
     signal setupGame(variant info)
     onSetupGame: {
         gameInitData = info;
         initDisplay();
     }
 
+    // Game event pushed to list and processed. Use getGameEvent() to get the events.
     signal processGameEvent(int id)
     signal gameEvent(variant gameEvents)
     onGameEvent: {
