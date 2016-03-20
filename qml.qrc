@@ -2,5 +2,9 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
+        <file>imp.js</file>
+        <file>Socket.qml</file>
+        <file>Events.qml</file>
+        <file>Game.qml</file>
     </qresource>
 </RCC>
